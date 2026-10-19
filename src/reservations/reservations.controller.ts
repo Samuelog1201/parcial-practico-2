@@ -21,5 +21,19 @@ export class ReservationsController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.reservationsService.findOne(id);
   }
+
+  @Post()
+  create(@Body(requestValidationPipe) createReservationDto: CreateReservationDto) {
+    return this.reservationsService.create(createReservationDto);
+  }
+/*/
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(requestValidationPipe) updateReservationDto: UpdateReservationDto,
+  ) {
+    return this.reservationsService.update(id, updateReservationDto);
+  }
+/*/
 }
 
