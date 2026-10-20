@@ -5,6 +5,8 @@ import { RoomEntity } from '../rooms/entities/room.entity';
 import { ReservationEntity } from './entities/reservation.entity';
 import { ReservationRulesService } from './reservation-rules.service';
 import { ReservationsService } from './reservations.service';
+import { describe, jest, beforeEach, it, expect } from "@jest/globals";
+
 
 describe('ReservationsService', () => {
   let service: ReservationsService;
