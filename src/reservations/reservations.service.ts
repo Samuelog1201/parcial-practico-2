@@ -5,6 +5,7 @@ import { RoomEntity } from '../rooms/entities/room.entity';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { ReservationEntity } from './entities/reservation.entity';
 import { ReservationRulesService } from './reservation-rules.service';
+import { UpdateReservationDto } from './dto/update-reservation.dto';
 
 @Injectable()
 export class ReservationsService {
@@ -13,6 +14,10 @@ export class ReservationsService {
     private readonly reservationsRepository: Repository<ReservationEntity>,
     @InjectRepository(RoomEntity)
     private readonly roomsRepository: Repository<RoomEntity>,
+    private readonly reservationRepository: Repository<ReservationEntity>,
+
+    private readonly reservationRulesService: ReservationRulesService,
+
     // TODO 2: Inject ReservationRulesService through this constructor.
   ) {}
 
@@ -51,5 +56,16 @@ export class ReservationsService {
       throw new NotFoundException(`Reservation with id ${id} was not found`);
     }
     return reservation;
+  }
+
+    async update(
+    id: number,
+    updateReservationDto: UpdateReservationDto,
+  ): Promise<ReservationEntity> {
+    const reservation = await this.findOne(id);
+
+    this.reservationRepository.merge(reservation, updateReservationDto);
+
+    return this.reservationRepository.save(reservation);
   }
 }

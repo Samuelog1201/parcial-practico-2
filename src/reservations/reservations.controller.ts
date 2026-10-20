@@ -2,6 +2,8 @@ import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs
 import { requestValidationPipe } from '../common/request-validation.pipe';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { ReservationsService } from './reservations.service';
+import { UpdateReservationDto } from './dto/update-reservation.dto';
+
 
 @Controller('reservations')
 export class ReservationsController {
@@ -26,7 +28,7 @@ export class ReservationsController {
   create(@Body(requestValidationPipe) createReservationDto: CreateReservationDto) {
     return this.reservationsService.create(createReservationDto);
   }
-/*/
+
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -34,6 +36,5 @@ export class ReservationsController {
   ) {
     return this.reservationsService.update(id, updateReservationDto);
   }
-/*/
 }
 
